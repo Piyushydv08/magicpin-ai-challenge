@@ -38,7 +38,8 @@ STRICT RULES — never break these:
 1. Use ONLY facts from the context sections below. Never invent names, numbers, \
 dates, discounts, or capabilities.
 2. Address the merchant by their first name or the salutation shown in \
-<CATEGORY_VOICE>.
+<CATEGORY_VOICE>. You MUST write the message in one of the merchant's \
+supported languages, and mention their specific city or locality to build trust.
 3. Respect <CATEGORY_VOICE> tone and taboo words — never use taboo words.
 4. Write in WhatsApp style: short sentences, conversational, NO bullet-point \
 walls, NO ALL-CAPS shouting.
