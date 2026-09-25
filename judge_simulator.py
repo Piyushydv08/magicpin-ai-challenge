@@ -20,23 +20,27 @@ Author: magicpin AI Challenge Team
 # ██████  CONFIGURATION - EDIT THIS SECTION ██████
 # =============================================================================
 
+import os
+from dotenv import load_dotenv
+load_dotenv()
+
 # Your bot's URL (where your bot is running)
-BOT_URL = "http://localhost:8080"
+BOT_URL = os.environ.get("BOT_URL", "http://localhost:8080")
 
 # Choose your LLM provider: "openai", "anthropic", "gemini", "deepseek", "groq", "ollama", "openrouter"
-LLM_PROVIDER = "openai"
+LLM_PROVIDER = os.environ.get("LLM_PROVIDER", "gemini")
 
-# Your API key (paste your key here)
-LLM_API_KEY = ""  # <-- PUT YOUR API KEY HERE
+# Your API key
+LLM_API_KEY = os.environ.get("GEMINI_API_KEY", "")
 
-# Model to use (leave empty for default, or specify like "gpt-4o", "claude-3-5-sonnet-20241022", etc.)
-LLM_MODEL = ""  # <-- Optional: specify model or leave empty for default
+# Model to use
+LLM_MODEL = os.environ.get("GEMINI_MODEL", "")
 
 # For Ollama only: local server URL
 OLLAMA_URL = "http://localhost:11434"
 
 # Which test to run by default
-TEST_SCENARIO = "all"
+TEST_SCENARIO = os.environ.get("TEST_SCENARIO", "all")
 
 # =============================================================================
 # ██████  END OF CONFIGURATION - DON'T EDIT BELOW THIS LINE ██████
@@ -691,7 +695,7 @@ class JudgeSimulator:
 
         for i in range(1, 5):
             print_info(f"Turn {i}: Sending auto-reply...")
-            data, err, _ = self.client.reply(f"conv_auto_{i}", mid, auto_msg, i + 1)
+            data, err, _ = self.client.reply("conv_auto", mid, auto_msg, i + 1)
 
             if err:
                 print_fail(f"Error: {err}")
