@@ -488,7 +488,7 @@ async def reply(
     "/v1/teardown",
     summary="Wipe all in-memory state (judge calls this at end of test)",
     tags=["infrastructure"],
-    include_in_schema=False,  # hide from docs to avoid confusion
+    include_in_schema=True,  # hide from docs to avoid confusion
 )
 async def teardown() -> Dict[str, str]:
     context_store.clear()
