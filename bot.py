@@ -156,11 +156,17 @@ async def metadata() -> Dict[str, Any]:
     """
     members_raw = os.getenv("TEAM_MEMBERS", "")
     members = [m.strip() for m in members_raw.split(",") if m.strip()]
+    provider = os.getenv("LLM_PROVIDER", "gemini").lower()
+    model = (
+        os.getenv("GEMINI_MODEL", "gemini-2.5-flash")
+        if provider == "gemini"
+        else os.getenv("LLM_MODEL", provider)
+    )
 
     return {
         "team_name": os.getenv("TEAM_NAME", "Team Vera"),
         "team_members": members,
-        "model": os.getenv("LLM_MODEL", "claude-sonnet-4-5"),
+        "model": model,
         "approach": os.getenv(
             "BOT_APPROACH",
             "4-context composer with LLM + deterministic routing",

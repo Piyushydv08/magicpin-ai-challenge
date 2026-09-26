@@ -113,6 +113,15 @@ class TestMetadata:
         body = client.get("/v1/metadata").json()
         assert isinstance(body["team_members"], list)
 
+    def test_gemini_metadata_uses_gemini_model(self, monkeypatch):
+        monkeypatch.setenv("LLM_PROVIDER", "gemini")
+        monkeypatch.setenv("GEMINI_MODEL", "gemini-test-model")
+        monkeypatch.setenv("LLM_MODEL", "claude-sonnet-4-5")
+
+        body = client.get("/v1/metadata").json()
+
+        assert body["model"] == "gemini-test-model"
+
 
 # ---------------------------------------------------------------------------
 # POST /v1/context — the four scenarios the user explicitly asked for
